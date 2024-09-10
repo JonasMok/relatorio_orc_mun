@@ -98,4 +98,4 @@ Este projeto está sob a licença MIT - consulte o arquivo [LICENSE](LICENSE) pa
 
 ## Contato
 
-Para mais informações, entre em contato com [jonas.okl@gmail.com](mailto:jonas.okl@gmail.com).
+Para mais informações, entre em contato com [jonas.ok@gmail.com](mailto:jonas.ok@gmail.com).
