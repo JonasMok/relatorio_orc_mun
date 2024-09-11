@@ -3,6 +3,8 @@
 
 Este projeto é uma aplicação desenvolvida em Python utilizando a biblioteca [Streamlit](https://streamlit.io/) para visualização e análise de dados orçamentários municipais do Brasil no período de 2020 a 2023. A aplicação permite aos usuários selecionar um município específico e visualizar gráficos de receitas e despesas, bem como uma tabela detalhada dos indicadores de capacidade de pagamento (CAPAG) e suas respectivas notas.
 
+[link do webapp](https://relatoriomunicipal.streamlit.app/)
+
 ## Funcionalidades
 
 - Seleção de Estado e Município para visualização de dados.
