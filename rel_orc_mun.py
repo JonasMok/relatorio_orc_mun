@@ -173,7 +173,7 @@ def main():
 
     st.sidebar.markdown("---")
     st.sidebar.markdown(
-        '<h6>Made in &nbsp<img src="https://streamlit.io/images/brand/streamlit-mark-color.png" alt="Streamlit logo" height="16">&nbsp by <a href="www.linkedin.com/in/jonas-manabu-okawara">Jonas Okawara</a></h6>',
+        '<h6>Made in &nbsp<img src="https://streamlit.io/images/brand/streamlit-mark-color.png" alt="Streamlit logo" height="16">&nbsp by <a href="https://www.linkedin.com/in/jonas-manabu-okawara">Jonas Okawara</a></h6>',
     unsafe_allow_html=True,
     )
 
