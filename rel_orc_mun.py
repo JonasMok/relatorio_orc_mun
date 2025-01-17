@@ -16,23 +16,40 @@ def normalizar_texto(texto):
     texto = texto.upper().strip()
     return texto
 
+@st.cache_data
+def carregar_dados(caminho, formato='csv'):
+    if formato == 'csv':
+        arquivos = glob.glob(caminho + "*.csv")
+        return pd.concat([pd.read_csv(arquivo, encoding='ISO-8859-1', sep=';', on_bad_lines='skip') for arquivo in arquivos])
+    elif formato == 'parquet':
+        arquivos = glob.glob(caminho + "*.parquet")
+        return pd.concat([pd.read_parquet(arquivo) for arquivo in arquivos])
+
+@st.cache_data
+def carregar_arquivo_excel(nome_arquivo):
+    return pd.read_excel(nome_arquivo)
+
+def salvar_como_parquet(caminho):
+    arquivos_csv = glob.glob(caminho + "*.csv")
+    for arquivo in arquivos_csv:
+        df = pd.read_csv(arquivo, encoding='ISO-8859-1', sep=';', on_bad_lines='skip')
+        parquet_file = arquivo.replace('.csv', '.parquet')
+        df.to_parquet(parquet_file)
+
+
 def main():
     # Definir o caminho onde estão seus arquivos CSV
     caminho_desp = './Despesas/'  # Coloque './Despesas/' se a pasta Despesas estiver na mesma pasta que o script
     caminho_rec = './Receitas/'
 
-    # Usar glob para encontrar todos os arquivos CSV no caminho
-    arquivos_desp = glob.glob(caminho_desp + "*.csv")
-    arquivos_rec = glob.glob(caminho_rec + "*.csv")
+    # Verificar e converter arquivos para Parquet, caso necessário
+    salvar_como_parquet(caminho_desp)
+    salvar_como_parquet(caminho_rec)
 
-    # Carregar e concatenar todos os arquivos CSV
-    df_desp = pd.concat(
-        [pd.read_csv(arquivos, encoding='ISO-8859-1', sep=';', on_bad_lines='skip') for arquivos in arquivos_desp],
-        ignore_index=True)
+    # Carregar dados em cache
+    df_desp = carregar_dados(caminho_desp, formato='parquet')
+    df_rec = carregar_dados(caminho_rec, formato='parquet')
 
-    df_rec = pd.concat(
-        [pd.read_csv(arquivos, encoding='ISO-8859-1', sep=';', on_bad_lines='skip') for arquivos in arquivos_rec],
-        ignore_index=True)
 
     # Converter a coluna 'Ano' para string
     df_rec['Ano'] = df_rec['Ano'].astype(str)
